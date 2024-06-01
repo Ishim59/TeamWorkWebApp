@@ -43,7 +43,27 @@ public class AppRepository : IAppRepository
         return await System.Threading.Tasks.Task.FromResult(Save()).ConfigureAwait(false);
     }
 
+    public async Task<int> GetUserIdAsync(string email)
+    {
+        return (await _context.Users.FirstOrDefaultAsync(u => u.Email == email).ConfigureAwait(false))!.Id;
+    }
+
     public Task<User?> GetUserByIdAsync(int userId) => _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+    public async Task<bool> AddGroupAsync(string teamLead, string title, string description)
+    {
+        await System.Threading.Tasks.Task.Run(() =>
+        {
+            _context.Groups.Add(new Group { TeamLead = teamLead, Title = title, Description = description });
+        }).ConfigureAwait(false);
+        await _context.SaveChangesAsync().ConfigureAwait(false);
+        var lastGroup = _context.Groups.OrderBy(g => g.Id).Last();
+        var jObject = lastGroup.GetJson();
+        var jArray = (JArray)jObject["Members"]!;
+        jArray.Add(int.Parse(lastGroup.TeamLead));
+        _context.Groups.OrderBy(g => g.Id).Last().PutJson(jObject);
+        return Save();
+    }
 
     public Task<Group?> GetGroupByIdAsync(int groupId) => _context.Groups.FirstOrDefaultAsync(g => g.Id == groupId);
 

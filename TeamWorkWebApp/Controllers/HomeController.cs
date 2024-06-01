@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.Extensions.Caching.Memory;
 using TeamWorkWebApp.Models;
 
 namespace TeamWorkWebApp.Controllers
@@ -7,10 +8,11 @@ namespace TeamWorkWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IMemoryCache _cache;
+        public HomeController(ILogger<HomeController> logger, IMemoryCache cache)
         {
             _logger = logger;
+            _cache = cache;
         }
 
         public IActionResult Index()

@@ -17,7 +17,7 @@ namespace TeamWorkWebApp.Models
         [Required] 
         public string MembersJson { get; set; } = "{\"Members\": []}";
 
-        public JObject GetJson() => JObject.FromObject(MembersJson);
+        public JObject GetJson() => JObject.Parse(MembersJson);
 
         public void PutJson(JObject json)
         {
