@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TeamWorkWebApp.ViewModels
+﻿namespace TeamWorkWebApp.ViewModels
 {
-    public class AccountViewModel
+    public class SignUpViewModel
     {
         public string Email { get; set; }
         [DataType(DataType.Password)]
@@ -12,4 +10,3 @@ namespace TeamWorkWebApp.ViewModels
         public string Name { get; set; }
     }
 }
-

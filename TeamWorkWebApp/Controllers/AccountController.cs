@@ -13,37 +13,37 @@ namespace TeamWorkWebApp.Controllers
         {
             _appRepository = appRepository;
         }
-        public IActionResult SignIn()
+        public IActionResult SignIn(SignInViewModel signInViewModel)
         {
             return View();
         }
-        public IActionResult SignUp()
+        public IActionResult SignUp(SignUpViewModel signUpViewModel)
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(AccountViewModel accountViewModel)
+        public async Task<IActionResult> LoginAsync(SignInViewModel signInViewModel)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Unable to access your account. Check the correctness of the entered data";
+                ViewBag.Message = "Failed to SignIn";
                 return RedirectToAction("SignIn", "Account");
             }
-            if(!await _appRepository.UserExists(accountViewModel.Email, accountViewModel.Password).ConfigureAwait(false))
+            if(!await _appRepository.UserExistsAsync(signInViewModel.Email, signInViewModel.Password).ConfigureAwait(false))
                 return RedirectToAction("SignIn", "Account");
             return RedirectToAction("Privacy", "Home");
         }
         [HttpPost]
-        public async Task<IActionResult> RegistrationAsync(AccountViewModel accountViewModel)
+        public async Task<IActionResult> RegistrationAsync(SignUpViewModel signUnViewModel)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Unable to access your account. Check the correctness of the entered data";
+                ViewBag.Message = "Failed to SignUp";
                 return RedirectToAction("SignUp", "Account");
             }
-            if(accountViewModel.Password != accountViewModel.PasswordConfirmation)
+            if(signUnViewModel.Password != signUnViewModel.PasswordConfirmation)
                 return RedirectToAction("SignUp", "Account");
-            return await _appRepository.AddUser(accountViewModel.Email, accountViewModel.Password, accountViewModel.Name).ConfigureAwait(false) ?
+            return await _appRepository.AddUserAsync(signUnViewModel.Email, signUnViewModel.Password, signUnViewModel.Name).ConfigureAwait(false) ?
                 RedirectToAction("Privacy", "Home") : RedirectToAction("SignUp", "Account");
         }
     }
