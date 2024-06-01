@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿@model TeamWorkWebApp.ViewModels.GroupsViewModel
-
-<h1>@Model.Id</h1>
-=======
+@model TeamWorkWebApp.ViewModels.GroupsViewModel
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,7 +105,7 @@
         }
 
         .groups ul li button:hover {
-            background-color: #e0e0;
+            background-color: #e0e0e0;
         }
 
         .button-content {
@@ -153,6 +149,44 @@
             width: 970px; /* Set fixed width for the content container */
             overflow-y: auto;
             max-height: 500px;
+            position: relative;
+        }
+
+        .group-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .group-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .group-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .participants-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .participants-list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .go-to-tasks {
+            position:absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
         }
         
     </style>
@@ -171,17 +205,27 @@
                     <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
                     <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
                     <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-
-
                 </ul>
             </div>
             <div class="add-group">
                 <button class="add-group-button">Добавить группу</button>
             </div>
         </div>
-        <div class="content"></div>
+        <div class="content">
+            <div class="group-details">
+                <h2 class="group-title">Название группы</h2>
+                <p class="group-description">Полное описание группы. Здесь будет отображаться подробное описание выбранной группы.</p>
+                <h3 class="participants-title">Список участников</h3>
+                <ul class="participants-list">
+                    <li>Участник 1</li>
+                    <li>Участник 2</li>
+                    <li>Участник 3</li>
+                    <li>Участник 4</li>
+                </ul>
+                <button class="go-to-tasks">Перейти к задачам</button>
+            </div>
+        </div>
        
     </div>
 </body>
 </html>
->>>>>>> 18cd784a518011002f3567761fc67782e6cdd0b6
