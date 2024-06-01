@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿@model TeamWorkWebApp.ViewModels.GroupsViewModel
-
-<h1>@Model.Id</h1>
-=======
-﻿<!DOCTYPE html>
+@model TeamWorkWebApp.ViewModels.GroupsViewModel
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,8 +52,7 @@
             border-radius: 10px; /* Скругление углов контейнера */
             overflow-y: auto;
             max-height: 430px;
-            scrollbar-width: 20px;
-        }
+            /* scrollbar-width: 20px;*/        }
 
         .add-group {
             margin-top: auto; /* Переместить кнопку вниз контейнера */
@@ -109,7 +104,7 @@
         }
 
         .groups ul li button:hover {
-            background-color: #e0e0;
+            background-color: #e0e0e0;
         }
 
         .button-content {
@@ -161,22 +156,27 @@
     <div class="container_groups">
         <div class="group-container">
             <div class="groups">
+                @if(@Model.Groups != null)
+                {
                 <ul>
-                    <li><button><div class="button-content"><div class="button-title">Группа 1</div><div class="button-text">Краткое описаниеddddddddddddddddddddddddddddddddddddd группы 1</div><div class="button-number">1</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 2</div><div class="button-text">Краткое описание группы 2</div><div class="button-number">2</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 3</div><div class="button-text">Краткое описание группы 3</div><div class="button-number">3</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 4</div><div class="button-text">Краткое описание группы 4</div><div class="button-number">4</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-
+                    @foreach (var group in @Model.Groups)
+                    {
+                        <li>
+                            <button>
+                                <div class="button-content">
+                                    <div class="button-title">@group.Title</div>
+                                    <div class="button-text">@group.Description</div>
+                                    <div class="button-number"></div> @* TODO members count and action *@
+                                </div>
+                            </button>
+                        </li>
+                    }
 
                 </ul>
+                }
             </div>
             <div class="add-group">
-                <button class="add-group-button">Добавить группу</button>
+                <button class="add-group-button">Добавить группу</button> @*TODO Action*@
             </div>
         </div>
         <div class="content"></div>
@@ -184,4 +184,4 @@
     </div>
 </body>
 </html>
->>>>>>> 18cd784a518011002f3567761fc67782e6cdd0b6
+
