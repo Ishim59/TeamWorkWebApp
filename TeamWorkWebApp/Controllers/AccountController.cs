@@ -1,9 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TeamWorkWebApp.Interfaces;
+using TeamWorkWebApp.Models;
+using TeamWorkWebApp.Repositories;
+using TeamWorkWebApp.ViewModels;
 
 namespace TeamWorkWebApp.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IAppRepository _appRepository;
+        public AccountController(IAppRepository appRepository)
+        {
+            _appRepository = appRepository;
+        }
         public IActionResult SignIn()
         {
             return View();
@@ -12,11 +21,13 @@ namespace TeamWorkWebApp.Controllers
         {
             return View();
         }
-        public IActionResult Login()
+        [HttpPost]
+        public IActionResult Login(AccountViewModel accountViewModel)
         {
-            // TODO Check Email and Password
-            return RedirectToAction("Index", "Home");
+            
+            return RedirectToAction("Privacy", "Home");
         }
+        [HttpPost]
         public IActionResult Registration()
         {
             return RedirectToAction("Privacy", "Home");

@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /TeamWorkWebApp/appsettings.json
+/TeamWorkWebApp/Migrations/20240523202625_PleaseMigration.cs
+/TeamWorkWebApp/Migrations/20240521203533_InitialMigration.cs
+/TeamWorkWebApp/Migrations/AppDbContextModelSnapshot.cs
