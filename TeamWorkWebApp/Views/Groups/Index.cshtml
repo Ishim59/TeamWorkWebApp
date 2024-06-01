@@ -53,8 +53,7 @@
             overflow-y: auto;
             height: 430px;
             max-height: 430px;
-            scrollbar-width: 20px;
-        }
+            /* scrollbar-width: 20px;*/        }
 
         .add-group {
             margin-top: auto; /* Переместить кнопку вниз контейнера */
@@ -204,12 +203,15 @@
     <div class="container_groups">
         <div class="group-container">
             <div class="groups">
+                @if(@Model.Groups != null)
+                {
                 <ul>
                     <li><button><div class="button-content"><div class="button-title">Группа 2</div><div class="button-text">Краткое описание группы 2</div><img src="~/SVG/crown.png" class="group-icon"></div></button></li>
                 </ul>
+                }
             </div>
             <div class="add-group">
-                <button class="add-group-button">Добавить группу</button>
+                <button class="add-group-button">Добавить группу</button> @*TODO Action*@
             </div>
         </div>
          <div class="content">

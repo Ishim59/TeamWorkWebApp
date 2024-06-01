@@ -21,7 +21,6 @@ namespace TeamWorkWebApp.Controllers
         public async Task<IActionResult> IndexAsync(GroupsViewModel groupsViewModel)
         {
             _groupsViewModel = groupsViewModel;
-            await _appRepository.AddGroupAsync(_groupsViewModel.Id.ToString(), "Title 6", "Desc 6").ConfigureAwait(false);
             if (_cache.TryGetValue(_groupsCacheKey, out IEnumerable<Group>? groups))
             {
                 _groupsViewModel.Groups = _cache.Get<List<Group>?>(_groupsCacheKey);
