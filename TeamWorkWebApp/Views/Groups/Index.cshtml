@@ -51,6 +51,7 @@
             padding: 10px;
             border-radius: 10px; /* Скругление углов контейнера */
             overflow-y: auto;
+            height: 430px;
             max-height: 430px;
             scrollbar-width: 20px;
         }
@@ -188,6 +189,14 @@
             color: white;
             cursor: pointer;
         }
+
+        .group-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+        }
         
     </style>
 </head>
@@ -196,35 +205,58 @@
         <div class="group-container">
             <div class="groups">
                 <ul>
-                    <li><button><div class="button-content"><div class="button-title">Группа 1</div><div class="button-text">Краткое описаниеddddddddddddddddddddddddddddddddddddd группы 1</div><div class="button-number">1</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 2</div><div class="button-text">Краткое описание группы 2</div><div class="button-number">2</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 3</div><div class="button-text">Краткое описание группы 3</div><div class="button-number">3</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 4</div><div class="button-text">Краткое описание группы 4</div><div class="button-number">4</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
-                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 2</div><div class="button-text">Краткое описание группы 2</div><img src="~/SVG/crown.png" class="group-icon"></div></button></li>
                 </ul>
             </div>
             <div class="add-group">
                 <button class="add-group-button">Добавить группу</button>
             </div>
         </div>
-        <div class="content">
+         <div class="content">
             <div class="group-details">
                 <h2 class="group-title">Название группы</h2>
                 <p class="group-description">Полное описание группы. Здесь будет отображаться подробное описание выбранной группы.</p>
                 <h3 class="participants-title">Список участников</h3>
                 <ul class="participants-list">
-                    <li>Участник 1</li>
+                    <li>Тимлид: Участник 1</li>
                     <li>Участник 2</li>
                     <li>Участник 3</li>
                     <li>Участник 4</li>
                 </ul>
                 <button class="go-to-tasks">Перейти к задачам</button>
             </div>
-        </div>
+        </div> 
+        @* <div class="content">
+            <form method="post" asp-action="AddGroup">
+                <div class="group-title">
+                    <input asp-for="NewTitle"/>
+                    <label asp-for="NewTitle">Название группы</label>
+                     <span asp-validation-for="NewTitle"></span> 
+                </div>
+                <div class="group-description">
+                    <input asp-for="NewDescription" />
+                    <label asp-for="NewDescription">Описание группы</label>
+                     <span asp-validation-for="NewDescription"></span> 
+                </div>
+                 <ul class="participants-list">
+                    <div id="inputContainer"></div>
+                    <button type="button" onclick="addInput()">Добавить поле</button>
+                    <button type="submit">Отправить</button
+                 </ul> 
+
+
+            </form>
+            <script>
+                function addInput() {
+                    var inputContainer = document.getElementById("inputContainer");
+                    var input = document.createElement("input");
+                    input.type = "text";
+                    input.name = "dynamicInput"; // Имя поля
+                    input.placeholder = "Введите значение";
+                    inputContainer.insertBefore(input, inputContainer.children[inputContainer.children.length - 1]); // Вставляем перед последней кнопкой
+                }
+            </script>
+        </div> *@
        
     </div>
 </body>
