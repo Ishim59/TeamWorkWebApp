@@ -11,8 +11,8 @@ using TeamWorkWebApp.Models;
 namespace TeamWorkWebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240523202625_PleaseMigration")]
-    partial class PleaseMigration
+    [Migration("20240601055723_TeamWorkMigration")]
+    partial class TeamWorkMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

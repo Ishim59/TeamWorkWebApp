@@ -365,3 +365,7 @@ FodyWeavers.xsd
 /TeamWorkWebApp/Migrations/20240523202625_PleaseMigration.cs
 /TeamWorkWebApp/Migrations/20240521203533_InitialMigration.cs
 /TeamWorkWebApp/Migrations/AppDbContextModelSnapshot.cs
+/TeamWorkWebApp/Migrations/20240521203533_InitialMigration.Designer.cs
+/TeamWorkWebApp/Migrations/20240523202625_PleaseMigration.Designer.cs
+/TeamWorkWebApp/appsettings.Development.json
+/TeamWorkWebApp/Migrations/20240601055723_TeamWorkMigration.cs

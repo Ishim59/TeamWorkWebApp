@@ -13,6 +13,7 @@ namespace TeamWorkWebApp.Repositories
             _context = context;
         }
 
+
         public async Task<IEnumerable<Group>> GetGroupsAsync()
         {
             return await _context.Groups.ToListAsync();
@@ -27,10 +28,14 @@ namespace TeamWorkWebApp.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password) != null;
         }
-
+        public async Task<bool> EmailExist(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u=> u.Email == email) != null;
+        }
         public Task<bool> AddUser(string email, string password, string name)
         {
-            _context.Users.Add(new User() { Email = email, Password = password, Name = name });
+            if(_context.Users.FirstOrDefaultAsync(u => u.Email == email) == null)
+                _context.Users.Add(new User() { Email = email, Password = password, Name = name });
             return Task.FromResult(Save());
         }
 
