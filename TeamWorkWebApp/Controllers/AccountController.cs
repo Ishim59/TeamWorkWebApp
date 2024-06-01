@@ -30,7 +30,7 @@ namespace TeamWorkWebApp.Controllers
                 return RedirectToAction("SignIn", "Account");
             }
             if(!await _appRepository.UserExists(accountViewModel.Email, accountViewModel.Password).ConfigureAwait(false))
-
+                return RedirectToAction("SignIn", "Account");
             return RedirectToAction("Privacy", "Home");
         }
         [HttpPost]
@@ -43,8 +43,8 @@ namespace TeamWorkWebApp.Controllers
             }
             if(accountViewModel.Password != accountViewModel.PasswordConfirmation)
                 return RedirectToAction("SignUp", "Account");
-
-            return await _appRepository.AddUser(accountViewModel.Email, accountViewModel.Password, accountViewModel.Name).ConfigureAwait(false) ? RedirectToAction("Privacy", "Home") : RedirectToAction("SignUp", "Account");
+            return await _appRepository.AddUser(accountViewModel.Email, accountViewModel.Password, accountViewModel.Name).ConfigureAwait(false) ?
+                RedirectToAction("Privacy", "Home") : RedirectToAction("SignUp", "Account");
         }
     }
 }
