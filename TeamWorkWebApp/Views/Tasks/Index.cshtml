@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup Layout</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container_tasks {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .main {
+            grid-row: 2;
+            display: grid;
+            grid-template-columns: 1fr 3fr auto;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .tasks {
+            border: 2px solid black;
+            margin-right: 10px;
+            padding: 10px;
+        }
+
+        .content {
+            border: 2px solid black;
+            margin-right: 10px;
+            padding: 10px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .sidebar div {
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            margin-bottom: 10px;
+        }
+
+        .sidebar div:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container_tasks">
+        <div class="main">
+            <div class="tasks">Задачи</div>
+            <div class="content"></div>
+            <div class="sidebar">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
