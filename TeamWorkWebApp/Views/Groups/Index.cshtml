@@ -1,5 +1,181 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup Layout</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* .container_groups {
+            display: grid;
+            grid-row: 1;
+            grid-template-rows: auto; 
+            grid-template-columns: 1fr 3fr;
+            height: 100vh;
+            box-sizing: border-box;
+            border-radius: 10px; 
+            border: 2px solid black;
+            padding: 10px;
+            margin-bottom: 80px;
+        } */
+
+        .container_groups {
+            display: grid;
+            grid-template-columns: 300px auto; /* Set fixed width for the group container */
+            grid-row: 2;
+            grid-template-rows: auto 1fr;
+            height: 72vh;
+            box-sizing: border-box;
+            border-radius: 10px; /* Скругление углов контейнера */
+            border: 2px solid black;
+            padding: 10px;
+            margin-bottom: 60px;
+        }
+
+        .group-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .groups {
+            border: 2px solid black;
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 10px; /* Скругление углов контейнера */
+            overflow-y: auto;
+            max-height: 430px;
+            scrollbar-width: 20px;
+        }
+
+        .add-group {
+            margin-top: auto; /* Переместить кнопку вниз контейнера */
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+        }
+
+        .add-group-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .groups::-webkit-scrollbar {
+            width: 20px; /* Установить ширину полосы прокрутки */
+            margin-left: -20px; /* Сдвинуть полосу прокрутки влево */
+        }
+
+        /* Стилизация ползунка прокрутки */
+        .groups::-webkit-scrollbar-thumb {
+            background-color: gray; /* Цвет ползунка */
+            border-radius: 10px; /* Скругление углов ползунка */
+        }
+        .groups ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .groups ul li {
+            margin-bottom: 10px;
+        }
+
+        .groups ul li button {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid black;
+            background-color: white;
+            cursor: pointer; /* Изменение курсора на указатель при наведении */
+            position: relative;
+        }
+
+        .groups ul li button:hover {
+            background-color: #e0e0;
+        }
+
+        .button-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align content to the left */
+        }
+
+        .button-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left; /* Align text to the left */
+        }
+
+        .button-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: left; /* Align text to the left */
+        }
+
+        .button-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+        }
+
+        /* .content {
+            border: 2px solid black;
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 10px; 
+        } */
+        .content {
+            border: 2px solid black;
+            padding: 10px;
+            border-radius: 10px; /* Скругление углов контейнера */
+            width: 970px; /* Set fixed width for the content container */
+            overflow-y: auto;
+            max-height: 500px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container_groups">
+        <div class="group-container">
+            <div class="groups">
+                <ul>
+                    <li><button><div class="button-content"><div class="button-title">Группа 1</div><div class="button-text">Краткое описаниеddddddddddddddddddddddddddddddddddddd группы 1</div><div class="button-number">1</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 2</div><div class="button-text">Краткое описание группы 2</div><div class="button-number">2</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 3</div><div class="button-text">Краткое описание группы 3</div><div class="button-number">3</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 4</div><div class="button-text">Краткое описание группы 4</div><div class="button-number">4</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+
+
+                </ul>
+            </div>
+            <div class="add-group">
+                <button class="add-group-button">Добавить группу</button>
+            </div>
+        </div>
+        <div class="content"></div>
+       
+    </div>
+</body>
+</html>
