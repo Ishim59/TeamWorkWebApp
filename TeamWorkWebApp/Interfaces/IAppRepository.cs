@@ -7,8 +7,8 @@ namespace TeamWorkWebApp.Interfaces
         Task<IEnumerable<User>> GetUsersAsync();
         Task<IEnumerable<Group>> GetGroupsAsync();
         Task<IEnumerable<Models.Task>> GetTasksAsync();
-        Task<bool> UserExists(string email, string password);
-        Task<bool> AddUser(string email, string password, string name);
+        Task<bool> UserExistsAsync(string email, string password);
+        Task<bool> AddUserAsync(string email, string password, string name);
 
 
         bool Save();

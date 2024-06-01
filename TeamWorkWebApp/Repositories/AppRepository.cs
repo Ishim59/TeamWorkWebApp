@@ -16,27 +16,27 @@ namespace TeamWorkWebApp.Repositories
 
         public async Task<IEnumerable<Group>> GetGroupsAsync()
         {
-            return await _context.Groups.ToListAsync();
+            return await _context.Groups.ToListAsync().ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Models.Task>> GetTasksAsync()
         {
-            return await _context.Tasks.ToListAsync();
+            return await _context.Tasks.ToListAsync().ConfigureAwait(false);
         }
 
-        public async Task<bool> UserExists(string email, string password)
+        public async Task<bool> UserExistsAsync(string email, string password)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password) != null;
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password).ConfigureAwait(false) != null;
         }
-        public async Task<bool> EmailExist(string email)
+        //public async Task<bool> EmailExist(string email)
+        //{
+        //    return await _context.Users.FirstOrDefaultAsync(u=> u.Email == email) != null;
+        //}
+        public async Task<bool> AddUserAsync(string email, string password, string name)
         {
-            return await _context.Users.FirstOrDefaultAsync(u=> u.Email == email) != null;
-        }
-        public Task<bool> AddUser(string email, string password, string name)
-        {
-            if(_context.Users.FirstOrDefaultAsync(u => u.Email == email) == null)
+            if(!await _context.Users.AnyAsync(u => u.Email == email).ConfigureAwait(false))
                 _context.Users.Add(new User() { Email = email, Password = password, Name = name });
-            return Task.FromResult(Save());
+            return await Task.FromResult(Save()).ConfigureAwait(false);
         }
 
         public bool Save()
@@ -46,7 +46,7 @@ namespace TeamWorkWebApp.Repositories
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.ToListAsync().ConfigureAwait(false);
         }
     }
 }
