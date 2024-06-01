@@ -40,7 +40,7 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-            <p class="text-center">No account yet? <a asp-controller="Account" asp-action="Registration">Register</a>!</p>
+            <p class="text-center">No account yet? <a asp-controller="Account" asp-action="SignUp">SignUp</a>!</p>
         </form>
         @if (ViewBag.Message != null)
         {
