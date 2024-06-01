@@ -1,5 +1,5 @@
 @model TeamWorkWebApp.ViewModels.GroupsViewModel
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -148,6 +148,44 @@
             width: 970px; /* Set fixed width for the content container */
             overflow-y: auto;
             max-height: 500px;
+            position: relative;
+        }
+
+        .group-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .group-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .group-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .participants-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .participants-list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .go-to-tasks {
+            position:absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
         }
         
     </style>
@@ -159,19 +197,15 @@
                 @if(@Model.Groups != null)
                 {
                 <ul>
-                    @foreach (var group in @Model.Groups)
-                    {
-                        <li>
-                            <button>
-                                <div class="button-content">
-                                    <div class="button-title">@group.Title</div>
-                                    <div class="button-text">@group.Description</div>
-                                    <div class="button-number"></div> @* TODO members count and action *@
-                                </div>
-                            </button>
-                        </li>
-                    }
-
+                    <li><button><div class="button-content"><div class="button-title">Группа 1</div><div class="button-text">Краткое описаниеddddddddddddddddddddddddddddddddddddd группы 1</div><div class="button-number">1</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 2</div><div class="button-text">Краткое описание группы 2</div><div class="button-number">2</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 3</div><div class="button-text">Краткое описание группы 3</div><div class="button-number">3</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 4</div><div class="button-text">Краткое описание группы 4</div><div class="button-number">4</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
+                    <li><button><div class="button-content"><div class="button-title">Группа 5</div><div class="button-text">Краткое описание группы 5</div><div class="button-number">5</div></div></button></li>
                 </ul>
                 }
             </div>
@@ -179,9 +213,21 @@
                 <button class="add-group-button">Добавить группу</button> @*TODO Action*@
             </div>
         </div>
-        <div class="content"></div>
+        <div class="content">
+            <div class="group-details">
+                <h2 class="group-title">Название группы</h2>
+                <p class="group-description">Полное описание группы. Здесь будет отображаться подробное описание выбранной группы.</p>
+                <h3 class="participants-title">Список участников</h3>
+                <ul class="participants-list">
+                    <li>Участник 1</li>
+                    <li>Участник 2</li>
+                    <li>Участник 3</li>
+                    <li>Участник 4</li>
+                </ul>
+                <button class="go-to-tasks">Перейти к задачам</button>
+            </div>
+        </div>
        
     </div>
 </body>
 </html>
-
