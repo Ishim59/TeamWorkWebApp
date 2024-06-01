@@ -369,3 +369,4 @@ FodyWeavers.xsd
 /TeamWorkWebApp/Migrations/20240523202625_PleaseMigration.Designer.cs
 /TeamWorkWebApp/appsettings.Development.json
 /TeamWorkWebApp/Migrations/20240601055723_TeamWorkMigration.cs
+/TeamWorkWebApp/TeamWorkWebApp.csproj.DotSettings

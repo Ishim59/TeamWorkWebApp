@@ -13,11 +13,11 @@ namespace TeamWorkWebApp.Controllers
         {
             _appRepository = appRepository;
         }
-        public IActionResult SignIn()
+        public IActionResult SignIn(SignInViewModel signInViewModel)
         {
             return View();
         }
-        public IActionResult SignUp()
+        public IActionResult SignUp(SignUpViewModel signUpViewModel)
         {
             return View();
         }
@@ -26,7 +26,7 @@ namespace TeamWorkWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Unable to access your account. Check the correctness of the entered data";
+                ViewBag.Message = "Failed to SignIn";
                 return RedirectToAction("SignIn", "Account");
             }
             if(!await _appRepository.UserExistsAsync(signInViewModel.Email, signInViewModel.Password).ConfigureAwait(false))
@@ -38,7 +38,7 @@ namespace TeamWorkWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Unable to access your account. Check the correctness of the entered data";
+                ViewBag.Message = "Failed to SignUp";
                 return RedirectToAction("SignUp", "Account");
             }
             if(signUnViewModel.Password != signUnViewModel.PasswordConfirmation)
