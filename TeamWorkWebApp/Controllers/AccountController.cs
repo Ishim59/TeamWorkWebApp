@@ -24,13 +24,28 @@ namespace TeamWorkWebApp.Controllers
         [HttpPost]
         public IActionResult Login(AccountViewModel accountViewModel)
         {
-            
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Message = "Unable to access your account. Check the correctness of the entered data";
+                return RedirectToAction("SignIn", "Account");
+            }
+            if(!_appRepository.UserExists(accountViewModel.Email, accountViewModel.Password).Result)
+
             return RedirectToAction("Privacy", "Home");
         }
         [HttpPost]
-        public IActionResult Registration()
+        public IActionResult Registration(AccountViewModel accountViewModel)
         {
-            return RedirectToAction("Privacy", "Home");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Message = "Unable to access your account. Check the correctness of the entered data";
+                return RedirectToAction("SignUp", "Account");
+            }
+            if(accountViewModel.Password != accountViewModel.PasswordConfirmation)
+                return RedirectToAction("SignUp", "Account");
+
+            return _appRepository.AddUser(accountViewModel.Email, accountViewModel.Password, accountViewModel.Name)
+                .Result ? RedirectToAction("Privacy", "Home") : RedirectToAction("SignUp", "Account");
         }
     }
 }
