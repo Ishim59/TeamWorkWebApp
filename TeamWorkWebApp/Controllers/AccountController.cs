@@ -22,19 +22,19 @@ namespace TeamWorkWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(AccountViewModel accountViewModel)
+        public async Task<IActionResult> Login(AccountViewModel accountViewModel)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.Message = "Unable to access your account. Check the correctness of the entered data";
                 return RedirectToAction("SignIn", "Account");
             }
-            if(!_appRepository.UserExists(accountViewModel.Email, accountViewModel.Password).Result)
+            if(!await _appRepository.UserExists(accountViewModel.Email, accountViewModel.Password).ConfigureAwait(false))
 
             return RedirectToAction("Privacy", "Home");
         }
         [HttpPost]
-        public IActionResult Registration(AccountViewModel accountViewModel)
+        public async Task<IActionResult> RegistrationAsync(AccountViewModel accountViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -44,8 +44,7 @@ namespace TeamWorkWebApp.Controllers
             if(accountViewModel.Password != accountViewModel.PasswordConfirmation)
                 return RedirectToAction("SignUp", "Account");
 
-            return _appRepository.AddUser(accountViewModel.Email, accountViewModel.Password, accountViewModel.Name)
-                .Result ? RedirectToAction("Privacy", "Home") : RedirectToAction("SignUp", "Account");
+            return await _appRepository.AddUser(accountViewModel.Email, accountViewModel.Password, accountViewModel.Name).ConfigureAwait(false) ? RedirectToAction("Privacy", "Home") : RedirectToAction("SignUp", "Account");
         }
     }
 }
