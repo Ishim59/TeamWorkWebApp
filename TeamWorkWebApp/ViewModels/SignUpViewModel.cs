@@ -1,4 +1,6 @@
-﻿namespace TeamWorkWebApp.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TeamWorkWebApp.ViewModels
 {
     public class SignUpViewModel
     {
