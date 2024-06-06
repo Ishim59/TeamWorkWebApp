@@ -48,7 +48,7 @@ public class AppRepository : IAppRepository
         return (await _context.Users.FirstOrDefaultAsync(u => u.Email == email).ConfigureAwait(false))!.Id;
     }
 
-    public Task<User?> GetUserByIdAsync(int userId) => _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+    public Task<User> GetUserByIdAsync(int userId) => _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
     public async Task<bool> AddGroupAsync(string teamLead, string title, string description)
     {
@@ -65,7 +65,7 @@ public class AppRepository : IAppRepository
         return Save();
     }
 
-    public Task<Group?> GetGroupByIdAsync(int groupId) => _context.Groups.FirstOrDefaultAsync(g => g.Id == groupId);
+    public Task<Group> GetGroupByIdAsync(int groupId) => _context.Groups.FirstOrDefaultAsync(g => g.Id == groupId);
     public async Task<IEnumerable<User>> GetGroupMembersAsync(int groupId)
     {
         var members = new List<User>();
@@ -77,6 +77,18 @@ public class AppRepository : IAppRepository
             members.Add(await GetUserByIdAsync(item.Value<int>()).ConfigureAwait(false)!);
         }
         return members;
+    }
+
+    public async Task<bool> AddTaskAsync(int executor, int groupId, string title, string description)
+    {
+        _context.Tasks.Add(new Task()
+        {
+            User = await GetUserByIdAsync(executor).ConfigureAwait(false),
+            GroupObj = await GetGroupByIdAsync(groupId).ConfigureAwait(false),
+            Title = title,
+            Description = description
+        });
+        return Save();
     }
 
     public async Task<IEnumerable<Group>> GetGroupsByUserAsync(int userId)
@@ -98,7 +110,7 @@ public class AppRepository : IAppRepository
         return result;
     }
 
-    public async Task<IEnumerable<Task>> GetTasksOfExecutorAsync(User user, Group group)
+    public async Task<List<Task>> GetTasksOfExecutorAsync(User user, Group group)
     {
         return await _context.Tasks.Where(t => t.User == user && t.GroupObj == group).ToListAsync()
             .ConfigureAwait(false);

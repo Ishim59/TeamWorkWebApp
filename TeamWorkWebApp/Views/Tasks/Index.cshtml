@@ -1,4 +1,4 @@
-﻿@model TeamWorkWebApp.ViewModels.GroupsViewModel
+﻿@model TeamWorkWebApp.ViewModels.TasksViewModel
 ﻿
 <!DOCTYPE html>
 <html lang="en">
@@ -208,34 +208,43 @@
         
         <div class="task-container">
             <div class="title-group">
-                Название группы
+                @Model.GroupId
             </div>
+            
             <div class="tasks">
                 <ul>
-                    <li><button>
-                        <div class="button-content">
-                            <div class="button-title">Задача 1</div>
-                        </div>
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            <div class="button-content">
-                                <div class="button-title">Задача 2</div>
-                                <img src="~/SVG/Vector.svg" class="task-icon">
-                            </div>
-                        </button>
-                    </li>
+                    @foreach (var task in @Model.Tasks)
+                    {
+                        <li>
+                            <form method="post" asp-action="ShowTask">
+                                <button type="submit">
+                                    <div class="button-content">
+                                        <input asp-for="SelectedTaskId" value="@task.Id" type="hidden"/>
+                                        <input asp-for="Id" value="@Model.Id" type="hidden"/>
+                                        <input asp-for="GroupId" value="@Model.GroupId" type="hidden"/>
+                                        <div class="button-title">@task.Title</div>
+                                        @if (task.Status)
+                                        {
+                                            <img src="~/SVG/Vector.svg" class="task-icon">
+                                        }
+                                    </div>
+                                </button>
+                            </form>
+                        </li>
+                    }
                 </ul>
             </div>
             
         </div>
         <div class="content">
-            <div class="task-details">
-                <h2 class="task-title">Задача номер какой-то</h2>
-                <p class="task-description">Полное описание задачи. Здесь будет отображаться подробное описание выбранной задачи.</p>
-                <button class="mark-as-completed">Отметить как выполненное</button>
-            </div>
+            @if (@Model.SelectedTaskId != 0)
+            {
+                <div class="task-details">
+                    <h2 class="task-title">@Model.SelectedTask.Title</h2>
+                    <p class="task-description">@Model.SelectedTask.Description</p>
+                    <button class="mark-as-completed">Отметить как выполненное</button>
+                </div>
+            }
         </div>
         @* <div class="content">
         <form method="post" asp-action="AddGroup">

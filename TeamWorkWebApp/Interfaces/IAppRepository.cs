@@ -9,7 +9,7 @@ namespace TeamWorkWebApp.Interfaces
         Task<IEnumerable<Group>> GetGroupsAsync();
         Task<IEnumerable<Models.Task>> GetTasksAsync();
         Task<IEnumerable<Group>> GetGroupsByUserAsync(int userId);
-        Task<IEnumerable<Task>> GetTasksOfExecutorAsync(User user, Group group);
+        Task<List<Task>> GetTasksOfExecutorAsync(User user, Group group);
         Task<bool> UserExistsAsync(string email, string password);
         Task<bool> AddUserAsync(string email, string password, string name);
         Task<int> GetUserIdAsync (string email);
@@ -17,6 +17,7 @@ namespace TeamWorkWebApp.Interfaces
         Task<bool> AddGroupAsync(string teamLead, string title, string description);
         Task<Group?> GetGroupByIdAsync(int groupId);
         Task<IEnumerable<User>> GetGroupMembersAsync(int groupId);
+        Task<bool> AddTaskAsync(int executor, int groupId, string title, string description);
         bool Save();
     }
 }

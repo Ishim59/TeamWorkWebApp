@@ -13,7 +13,7 @@ namespace TeamWorkWebApp.Controllers
         private readonly IMemoryCache _cache;
         private readonly string _groupsCacheKey = "groupsCacheKey";
         private GroupsViewModel _groupsViewModel;
-        
+
         public GroupsController(IAppRepository appRepository, IMemoryCache cache)
         {
             _appRepository = appRepository;
@@ -53,6 +53,14 @@ namespace TeamWorkWebApp.Controllers
         {
             _groupsViewModel = groupsViewModel;
             return Task.FromResult<IActionResult>(RedirectToAction("Index", _groupsViewModel));
+        }
+
+        public IActionResult ToTasks(GroupsViewModel groupsViewModel)
+        {
+            TasksViewModel tasksViewModel = new TasksViewModel();
+            tasksViewModel.GroupId = groupsViewModel.SelectedGroupId;
+            tasksViewModel.Id = groupsViewModel.Id;
+            return RedirectToAction("Index", "Tasks", tasksViewModel);
         }
     }
 }

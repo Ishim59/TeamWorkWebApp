@@ -200,10 +200,11 @@
     </style>
 </head>
 <body>
+<input asp-for="Id" value="@Model.Id" type="hidden"/>
 <div class="container_groups">
     <div class="group-container">
         <div class="groups">
-            @if(@Model.Groups != null)
+            @if (@Model.Groups != null)
             {
                 <ul>
                     @foreach (var group in @Model.Groups)
@@ -212,6 +213,7 @@
                             <form method="post" asp-action="ShowGroup">
                                 <button type="submit">
                                     <input asp-for="SelectedGroupId" hidden="" value="@group.Id"></input>
+                                    <input asp-for="Id" hidden="" value="@Model.Id"></input>
                                     <div class="button-content">
                                         <div class="button-title">@group.Title</div>
                                         <div class="button-text">@group.Description</div>
@@ -245,12 +247,17 @@
                         <li>@member.Name</li>
                     }
                 </ul>
-                <button class="go-to-tasks">Перейти к задачам</button>
-            </div>
-        </div> 
+                <form asp-action="ToTasks">
+                    <button type="submit">Перейти к задачам</button>
+                    <input asp-for="SelectedGroupId" hidden="" value="@Model.SelectedGroupId"></input>
+                    <input asp-for="Id" hidden="" value="@Model.Id"></input>
+                </form>
+                @*                     <button asp-action="ToTasks">Перейти к задачам</button>
+ *@ </div>
+        </div>
     }
-    
-        @* <div class="content">
+
+    @* <div class="content">
             <form method="post" asp-action="AddGroup">
                 <div class="group-title">
                     <input asp-for="NewTitle"/>
@@ -281,7 +288,7 @@
                 }
             </script>
         </div> *@
-       
-    </div>
+
+</div>
 </body>
 </html>
