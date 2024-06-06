@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model TeamWorkWebApp.ViewModels.GroupsViewModel
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,63 +10,265 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
+
+        /* .container_groups {
+                    display: grid;
+                    grid-row: 1;
+                    grid-template-rows: auto;
+                    grid-template-columns: 1fr 3fr;
+                    height: 100vh;
+                    box-sizing: border-box;
+                    border-radius: 10px;
+                    border: 2px solid black;
+                    padding: 10px;
+                    margin-bottom: 80px;
+                } */
 
         .container_tasks {
             display: grid;
+            grid-template-columns: 300px auto; /* Set fixed width for the group container */
+            grid-row: 2;
             grid-template-rows: auto 1fr;
-            height: 100vh;
+            height: 72vh;
             box-sizing: border-box;
+            border-radius: 10px; /* Скругление углов контейнера */
+            border: 2px solid black;
+            padding: 10px;
+            margin-bottom: 60px;
         }
 
-        .main {
-            grid-row: 2;
-            display: grid;
-            grid-template-columns: 1fr 3fr auto;
-            padding: 10px;
-            box-sizing: border-box;
+        .task-container {
+            display: flex;
+            flex-direction: column;
         }
 
         .tasks {
+            margin-top: 15px;
             border: 2px solid black;
             margin-right: 10px;
             padding: 10px;
+            border-radius: 10px; /* Скругление углов контейнера */
+            overflow-y: auto;
+            height: 440px;
+            max-height: 440px;
+            /* scrollbar-width: 20px;*/
         }
 
-        .content {
-            border: 2px solid black;
-            margin-right: 10px;
-            padding: 10px;
-        }
-
-        .sidebar {
+        .add-task {
+            margin-top: auto; /* Переместить кнопку вниз контейнера */
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            justify-content: center;
+            padding-top: 10px;
         }
 
-        .sidebar div {
-            width: 50px;
-            height: 50px;
-            border: 2px solid black;
+       /*  .add-group-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        } */
+
+        .tasks::-webkit-scrollbar {
+            width: 20px; /* Установить ширину полосы прокрутки */
+            margin-left: -20px; /* Сдвинуть полосу прокрутки влево */
+        }
+
+        /* Стилизация ползунка прокрутки */
+        .tasks::-webkit-scrollbar-thumb {
+            background-color: gray; /* Цвет ползунка */
+            border-radius: 10px; /* Скругление углов ползунка */
+        }
+
+        .tasks ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tasks ul li {
             margin-bottom: 10px;
         }
 
-        .sidebar div:last-child {
-            margin-bottom: 0;
+        .tasks ul li button {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid black;
+            background-color: white;
+            cursor: pointer; /* Изменение курсора на указатель при наведении */
+            position: relative;
+        }
+
+        .tasks ul li button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button-title {
+            font-weight: bold;
+            text-align: center;
+
+        }
+
+        .button-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: left; /* Align text to the left */
+        }
+
+        /* .button-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+        } */
+
+        /* .content {
+                    border: 2px solid black;
+                    margin-right: 10px;
+                    padding: 10px;
+                    border-radius: 10px;
+                } */
+        .content {
+            border: 2px solid black;
+            padding: 10px;
+            border-radius: 10px; /* Скругление углов контейнера */
+            width: 970px; /* Set fixed width for the content container */
+            overflow-y: auto;
+            max-height: 500px;
+            position: relative;
+            height: 490px;
+        }
+
+        .task-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .task-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .task-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .mark-as-completed {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .task-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .title-group{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
+    
     <div class="container_tasks">
-        <div class="main">
-            <div class="tasks">Задачи</div>
-            <div class="content"></div>
-            <div class="sidebar">
-                <div></div>
-                <div></div>
+        
+        <div class="task-container">
+            <div class="title-group">
+                Название группы
+            </div>
+            <div class="tasks">
+                <ul>
+                    <li><button>
+                        <div class="button-content">
+                            <div class="button-title">Задача 1</div>
+                        </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button>
+                            <div class="button-content">
+                                <div class="button-title">Задача 2</div>
+                                <img src="~/SVG/Vector.svg" class="task-icon">
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="content">
+            <div class="task-details">
+                <h2 class="task-title">Задача номер какой-то</h2>
+                <p class="task-description">Полное описание задачи. Здесь будет отображаться подробное описание выбранной задачи.</p>
+                <button class="mark-as-completed">Отметить как выполненное</button>
             </div>
         </div>
+        @* <div class="content">
+        <form method="post" asp-action="AddGroup">
+        <div class="group-title">
+        <input asp-for="NewTitle"/>
+        <label asp-for="NewTitle">Название группы</label>
+        <span asp-validation-for="NewTitle"></span>
+        </div>
+        <div class="group-description">
+        <input asp-for="NewDescription" />
+        <label asp-for="NewDescription">Описание группы</label>
+        <span asp-validation-for="NewDescription"></span>
+        </div>
+        <ul class="participants-list">
+        <div id="inputContainer"></div>
+        <button type="button" onclick="addInput()">Добавить поле</button>
+        <button type="submit">Отправить</button
+        </ul>
+
+
+        </form>
+        <script>
+        function addInput() {
+        var inputContainer = document.getElementById("inputContainer");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "dynamicInput"; // Имя поля
+        input.placeholder = "Введите значение";
+        inputContainer.insertBefore(input, inputContainer.children[inputContainer.children.length - 1]); // Вставляем перед последней кнопкой
+        }
+        </script>
+        </div> *@
+
     </div>
 </body>
 </html>
