@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using TeamWorkWebApp.Interfaces;
 using TeamWorkWebApp.Models;
 using TeamWorkWebApp.ViewModels;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeamWorkWebApp.Controllers
 {
@@ -23,7 +24,7 @@ namespace TeamWorkWebApp.Controllers
             _groupsViewModel = groupsViewModel;
             if (_cache.TryGetValue(_groupsCacheKey, out IEnumerable<Group>? groups))
             {
-                _groupsViewModel.Groups = _cache.Get<List<Group>?>(_groupsCacheKey);
+                _groupsViewModel.Groups = (List<Group>?)groups;
             }
             else
             {
@@ -36,9 +37,22 @@ namespace TeamWorkWebApp.Controllers
 
                 _cache.Set(_groupsCacheKey, _groupsViewModel.Groups, cacheEntryOptions);
             }
-            
+
+            if (groupsViewModel.SelectedGroupId != 0)
+            {
+                _groupsViewModel.SelectedGroup =
+                    await _appRepository.GetGroupByIdAsync(_groupsViewModel.SelectedGroupId).ConfigureAwait(false);
+                _groupsViewModel.SelectedGroupMembers =
+                    (List<User>)await _appRepository.GetGroupMembersAsync(_groupsViewModel.SelectedGroupId).ConfigureAwait(false);
+            }
             
             return View(_groupsViewModel);
+        }
+
+        public Task<IActionResult> ShowGroup(GroupsViewModel groupsViewModel)
+        {
+            _groupsViewModel = groupsViewModel;
+            return Task.FromResult<IActionResult>(RedirectToAction("Index", _groupsViewModel));
         }
     }
 }

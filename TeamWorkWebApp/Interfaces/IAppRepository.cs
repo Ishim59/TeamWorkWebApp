@@ -16,6 +16,7 @@ namespace TeamWorkWebApp.Interfaces
         Task<User?> GetUserByIdAsync(int userId);
         Task<bool> AddGroupAsync(string teamLead, string title, string description);
         Task<Group?> GetGroupByIdAsync(int groupId);
+        Task<IEnumerable<User>> GetGroupMembersAsync(int groupId);
         bool Save();
     }
 }

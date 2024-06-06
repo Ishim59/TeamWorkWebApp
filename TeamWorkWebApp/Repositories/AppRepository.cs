@@ -66,6 +66,18 @@ public class AppRepository : IAppRepository
     }
 
     public Task<Group?> GetGroupByIdAsync(int groupId) => _context.Groups.FirstOrDefaultAsync(g => g.Id == groupId);
+    public async Task<IEnumerable<User>> GetGroupMembersAsync(int groupId)
+    {
+        var members = new List<User>();
+        var group = await GetGroupByIdAsync(groupId).ConfigureAwait(false);
+        var jObject = group!.GetJson();
+        var jArray = (JArray)jObject["Members"];
+        foreach (var item in jArray)
+        {
+            members.Add(await GetUserByIdAsync(item.Value<int>()).ConfigureAwait(false)!);
+        }
+        return members;
+    }
 
     public async Task<IEnumerable<Group>> GetGroupsByUserAsync(int userId)
     {

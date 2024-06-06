@@ -200,34 +200,56 @@
     </style>
 </head>
 <body>
-    <div class="container_groups">
-        <div class="group-container">
-            <div class="groups">
-                @if(@Model.Groups != null)
-                {
+<div class="container_groups">
+    <div class="group-container">
+        <div class="groups">
+            @if(@Model.Groups != null)
+            {
                 <ul>
-                    <li><button><div class="button-content"><div class="button-title">Группа 2</div><div class="button-text">Краткое описание группы 2</div><img src="~/SVG/crown.png" class="group-icon"></div></button></li>
+                    @foreach (var group in @Model.Groups)
+                    {
+                        <li>
+                            <form method="post" asp-action="ShowGroup">
+                                <button type="submit">
+                                    <input asp-for="SelectedGroupId" hidden="" value="@group.Id"></input>
+                                    <div class="button-content">
+                                        <div class="button-title">@group.Title</div>
+                                        <div class="button-text">@group.Description</div>
+                                        @if (group.TeamLead == @Model.Id.ToString())
+                                        {
+                                            <img src="~/SVG/crown.png" class="group-icon"/>
+                                        }
+                                    </div>
+                                </button>
+                            </form>
+                        </li>
+                    }
+
                 </ul>
-                }
-            </div>
-            <div class="add-group">
-                <button class="add-group-button">Добавить группу</button> @*TODO Action*@
-            </div>
+            }
         </div>
-         <div class="content">
+        <div class="add-group">
+            <button class="add-group-button">Добавить группу</button> @*TODO Action*@
+        </div>
+    </div>
+    @if (Model.SelectedGroup != null)
+    {
+        <div class="content">
             <div class="group-details">
-                <h2 class="group-title">Название группы</h2>
-                <p class="group-description">Полное описание группы. Здесь будет отображаться подробное описание выбранной группы.</p>
+                <h2 class="group-title">@Model.SelectedGroup.Title</h2>
+                <p class="group-description">@Model.SelectedGroup.Description</p>
                 <h3 class="participants-title">Список участников</h3>
                 <ul class="participants-list">
-                    <li>Тимлид: Участник 1</li>
-                    <li>Участник 2</li>
-                    <li>Участник 3</li>
-                    <li>Участник 4</li>
+                    @foreach (var member in @Model.SelectedGroupMembers)
+                    {
+                        <li>@member.Name</li>
+                    }
                 </ul>
                 <button class="go-to-tasks">Перейти к задачам</button>
             </div>
         </div> 
+    }
+    
         @* <div class="content">
             <form method="post" asp-action="AddGroup">
                 <div class="group-title">
