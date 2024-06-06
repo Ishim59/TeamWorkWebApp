@@ -20,13 +20,24 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная страница</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Groups" asp-action="Index">Группы</a>
                         </li>
                     </ul>
                 </div>
+                @* TODO name of User on navbar *@
+
+               @*  @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a> Привет, @User.Identity.Name</a></li>
+                    <li><a href="/Account/SignIn">Выйти</a></li>
+                }
+                else
+                {
+                    <li><a href="/Home/Index">Войти</a></li>
+                } *@
                 @* <div style="margin: 0 20px; color:white;" runat="server" id="Greeting"></div>
                 <a href="?entrance=1" runat="server" visible="true" id="aEntrance">Войти</a> *@
             </div>
